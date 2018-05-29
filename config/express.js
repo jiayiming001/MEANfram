@@ -10,6 +10,7 @@ const express = require("express"),
 
 const config = require('./config'); //加载一些配置,比如session的secret
 
+
 module.exports = function() {
     var app = express();
 
@@ -48,5 +49,7 @@ module.exports = function() {
     app.use(express.static(path.join(__dirname, '../pubilc'))); //配置静态文件路径
 
     require('../app/routes/index.server.routes')(app); //使用路由文件中的函数为app添加路由
+    require('../app/routes/user.server.routers.js')(app);
+
     return app;
 }
