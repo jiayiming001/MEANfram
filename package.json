@@ -1,0 +1,21 @@
+{
+  "name": "meanframwork",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "jiayi",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "compression": "^1.7.2",
+    "connect-redis": "^3.3.3",
+    "express": "^4.16.3",
+    "express-session": "^1.15.6",
+    "jade": "^1.11.0",
+    "method-override": "^2.3.10",
+    "morgan": "^1.9.0"
+  }
+}
