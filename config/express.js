@@ -6,7 +6,9 @@ const express = require("express"),
     methodOverride = require('method-override'), //提供了对HTTP DELETE和PUT的方法
     path = require('path'),         //提供文件目录拼接
     session = require('express-session'), //Simple cookie-based session middleware
-    redisStore = require('connect-redis')(session); //redis内存数据库存放session功能
+    redisStore = require('connect-redis')(session), //redis内存数据库存放session功能
+    passport = require('passport'), //Passport是Node.js的身份验证中间件
+    flash = require('connect-flash'); //用于存储临时消息的node模块
 
 const config = require('./config'); //加载一些配置,比如session的secret
 
@@ -25,9 +27,9 @@ module.exports = function() {
     app.use(methodOverride()); //添加DELETE和PUT两个http请求方式
 
     app.set('views', path.join(__dirname , '../app/views')); //设置视图文件的存储目录
-    app.set('view engine', 'jade');    //设置EJS为express应用的模板引擎
+    app.set('view engine', 'ejs');    //设置EJS为express应用的模板引擎
 
-
+    app.use(flash());
     app.use(session({
         name: 'mytest',
         secret: config.sessionSecret,
@@ -44,6 +46,10 @@ module.exports = function() {
             pass: '',
         })
     }));//设置session配置
+
+
+    app.use(passport.initialize()); 
+    app.use(passport.session());//追踪用户会话
 
     //检查静态路由配置成功,访问http://localhost:3000/views/deaom.html
     app.use(express.static(path.join(__dirname, '../pubilc'))); //配置静态文件路径

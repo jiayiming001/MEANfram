@@ -1,5 +1,7 @@
 "use strict";
-const User = require('mongoose').model('User'); //返回在models中创建的User模型
+const User = require('mongoose').model('User'), //返回在models中创建的User模型
+    Passport = require('passport');
+
 
 exports.create = function(req, res, next) {   //根据req.body的json数据,创建一个user文档
     var user = new User(req.body); //创建一个文档,模型的实例
@@ -72,3 +74,75 @@ exports.userGetByUsername = function (req, res, next, username) { //url中带有
     });
 }
 
+
+var getErrorMessage = function(err) {   //用于处理mongoose错误对象并返回统一格式的错误消息
+    var message = '';                   //错误消息
+    if(err.code) {                      //mongoDB索引错误代码
+        switch (err.code){
+            case 11000:
+            case 11001:
+                message = 'Username alreay exists';
+                break;
+            default: 
+                message = "Something went wrong";
+        }
+    } else {                             //mongoose检验错误的err.errors对象
+        for (var errName in err.errors) {
+            if(err.errors[errName].message) message = err.errors[errName].message;
+        }
+    }
+    
+    return message;
+};
+
+
+exports.renderSigin = function (req, res, next) {   //负责登录功能的控制器
+    if(!req.user) {
+        res.render('signin', {
+            title: 'Sign-in Form',
+            message: req.flash('error') || req.flash('info') //读取flash中的消息
+        });
+    }else {
+        return res.redirect('/');
+    }
+};
+
+
+exports.renderSignup = function (req, res, next) {  //负责注册功能的控制器
+    if(!req.user) {
+        res.render('signup', {
+            title: 'Sign-yp Form',
+            message: req.flash('error') //读取flash中的消息
+        });
+    }else{
+        return res.redirect('/')
+    }
+}
+
+exports.signup = function (req, res, next) {  //创建新用户,创建成功就使用express提供的req.login()来创建一个登录成功的用户会话
+    if(!user) {                                 //登录成功后便会注册到req.user中
+        var user = new User(req.body);
+        var message = null;
+
+        user.provider = 'local';
+        
+        user.save((err) => {
+            if(err) {
+                var message = getErrorMessage(err);
+                req.flash('error', message);        //借用connect-flash模块,将消息存在会话对象flash中,到新页面一次性发送给用户
+                return res.redirect('/signup');            
+            }
+            req.login(user, function (err) {
+                if(err) return next(err);
+                return res.redirect('/');
+            });
+        });
+    }else {
+        return res.redirect('/');
+    }
+};
+
+exports.signout = function (req, res) {
+    req.logout();
+    res.redirect('/');
+};
