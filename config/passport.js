@@ -19,4 +19,5 @@ module.exports = function () {
     });
 
     require('./strategies/local.js')();   //加载本地策略配置
+    require('./strategies/facebook')();     //加载facebook策略配置
 };

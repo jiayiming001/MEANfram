@@ -32,6 +32,16 @@ module.exports = function(app) {
     app.route('/signout')
         .get(users.signout);
 
+    
+    app.get('/oauth/facebook', Passport.authenticate('facebook', {
+        failureRedirect: '/signin'
+    }));
+
+    app.get('/oauth/facebook/callback', Passport.authenticate('facebook', {
+        failureRedirect: '/signin',
+        successRedirect: '/'
+    }))
+
     app.param('userId', users.userByID);  //当请求的路由中有userId参数的时候调用,生产req.user对象,在read()之前执行
     app.param("username", users.userGetByUsername); //当请求的路由中有username参数的时候调用,生成req.user对象
 }

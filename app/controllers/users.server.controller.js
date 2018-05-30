@@ -146,3 +146,40 @@ exports.signout = function (req, res) {
     req.logout();
     res.redirect('/');
 };
+
+
+//处理OAuth用户的创建
+exports.saveOAuthUserProfile = function (req, profile, done) {
+    User.findOne({
+        provider: profile.provider,
+        providerId: profile.providerId
+    }, function (err, user) {
+        if(err) {
+            return done(err);
+        } else {
+            if(!user) {
+                var possibleUsername = profile.username || 
+                    ((profile.email) ? profile.email.split('@')[0] : '');
+                User.findUniqueUsername(possibleUsername, null, 
+                function (availableUsername) {
+                    profile.username = availableUsername;
+                    
+                    user = new User(profile);
+
+                    user.save((err) => {
+                        if(err) {
+                            var message = getErrorMessage(err);
+
+                            req.flash('error', message);
+                            return res.redirect('/signup');
+                        }
+
+                        return done(err, user);
+                    });
+                });
+            } else {
+                return done(err, user);
+            }
+        }
+    });
+};
