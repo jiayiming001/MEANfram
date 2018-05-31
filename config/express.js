@@ -33,7 +33,7 @@ module.exports = function() {
     app.use(session({
         name: 'mytest',
         secret: config.sessionSecret,
-        rolling: true,
+        rolling: true,      //强制将每次访问的回话cookies重置到最大时间
         resave: true,
         saveUninitialized: false,
         cookie: { 
@@ -52,10 +52,11 @@ module.exports = function() {
     app.use(passport.session());//追踪用户会话
 
     //检查静态路由配置成功,访问http://localhost:3000/views/deaom.html
-    app.use(express.static(path.join(__dirname, '../pubilc'))); //配置静态文件路径
+    app.use(express.static(path.join(__dirname, '../public'))); //配置静态文件路径
 
     require('../app/routes/index.server.routes')(app); //使用路由文件中的函数为app添加路由
     require('../app/routes/user.server.routers.js')(app);
+    require('../app/routes/article.server.routes')(app);
 
     return app;
 }

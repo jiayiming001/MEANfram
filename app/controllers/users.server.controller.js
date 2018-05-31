@@ -63,16 +63,16 @@ exports.delete = function (req, res, next) { //DETELE请求时调用,在中间�
     })
 };
 
-exports.userGetByUsername = function (req, res, next, username) { //url中带有username时调用
-    User.findOneByUsername(username, function (err, user) {
-        if(err) {
-            return next(err);
-        } else {
-            req.user = user;
-            next();
-        }
-    });
-}
+// exports.userGetByUsername = function (req, res, next, username) { //url中带有username时调用
+//     User.findOneByUsername(username, function (err, user) {
+//         if(err) {
+//             return next(err);
+//         } else {
+//             req.user = user;
+//             next();
+//         }
+//     });
+// }
 
 
 var getErrorMessage = function(err) {   //用于处理mongoose错误对象并返回统一格式的错误消息
@@ -182,3 +182,17 @@ exports.saveOAuthUserProfile = function (req, profile, done) {
         }
     });
 };
+
+
+//身份验证中间件
+//Passport提供了req.isAuthenticated()来验证用户是否通过身份验证
+exports.requiresLogin = function (req, res, next) {
+    if(!req.isAuthenticated()) {        
+        return res.status(401).send({
+            message: 'User is not logged in'
+        });
+    }
+
+    next();
+}
+

@@ -14,6 +14,7 @@ module.exports = function() {
         console.log("db connection disconnected!"); //db连接断开回调
     });
 
-    require('../app/models/user.server.model');
+    require('../app/models/user.server.model');  //注册User模型
+    require('../app/models/article.server.model');  //注册Article模型
     return db;
 }
