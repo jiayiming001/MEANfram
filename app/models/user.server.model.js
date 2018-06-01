@@ -38,7 +38,7 @@ var UserSchema = new Schema({
     prociderData: {},
     role: {
         type: String,
-        enum: ['Admin', 'Owner', 'User']
+        enum: ['Admin', 'User']
     },
     created: {
         type: Date,

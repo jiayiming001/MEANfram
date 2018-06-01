@@ -2,7 +2,8 @@
 module.exports = {
     sessionSecret: 'developmentSessionSecret',
     minute: 1000 * 60, //cookies的有效时长为6分钟
-    db: 'mongodb://localhost/mean-book?replicaSet=rs0',  //问号后面是选择单个副本集lddd
+    db: 'mongodb://localhost/mean-book?replicaSet=rs0',  //问号后面是选择单个副本集
+    adminpasswd: "admin",
     facebook: {
         clientID: '665005417241894',
         clientSecret: 'b7695e3cb2e2ee003fcf5eba782d441a',

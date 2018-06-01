@@ -1,6 +1,7 @@
 "use strict";
 const User = require('mongoose').model('User'), //返回在models中创建的User模型
-    Passport = require('passport');
+    Passport = require('passport'),
+    config = requir('./../../config/config.js'); 
 
 
 exports.create = function(req, res, next) {   //根据req.body的json数据,创建一个user文档
@@ -14,8 +15,15 @@ exports.create = function(req, res, next) {   //根据req.body的json数据,创�
     }); 
 };
 
-exports.list = function (req, res, next) {  //查找所有的user文档
-    User.find({}, (err, users) => {
+
+exports.list = function (req, res, next) {  //查找所有的user文档,满足role!=='admin'的用户
+    User.find({
+        'role': {
+            '$not': {
+                '$in': ['admin']
+            }
+        }
+    }, (err, users) => {
         if (err) {
             return  next(err);
         }else {
@@ -123,9 +131,11 @@ exports.signup = function (req, res, next) {  //创建新用户,创建成功就�
     if(!user) {                                 //登录成功后便会注册到req.user中
         var user = new User(req.body);
         var message = null;
-
-        user.provider = 'local';
-        
+        if(req.body.adminpasswd === congig.adminpasswd) {
+            user.role = 'admin';
+        } else {
+            user.provider = 'local'; 
+        }
         user.save((err) => {
             if(err) {
                 var message = getErrorMessage(err);

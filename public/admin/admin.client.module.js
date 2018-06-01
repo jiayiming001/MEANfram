@@ -1,0 +1,1 @@
+angular.module('admin', ['ngResource', 'users', 'articles']);
