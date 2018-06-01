@@ -1,8 +1,9 @@
 var app = angular.module("mean", [
-    'example', 
     'ngRoute', 
     'ngResource', 
-    'articles'
+    'example', 
+    'articles',
+    'users'
 ]);
 // app.config(['$locationProvider', '$routeProvider', 
 //     function ($locationProvider, $routeProvider) {

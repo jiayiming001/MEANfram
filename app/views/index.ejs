@@ -4,14 +4,6 @@
         <title><%= title %></title>
     </head>
     <body>
-        <h1><%= title %></h1>
-        <% if (user) { %>
-            <h2>Hello <%=user%></h2>
-            <a href="/signout">Sign out</a>
-        <% } else { %> 
-            <a href="/signup">Signup</a>
-            <a href="/signin">Signin</a>
-        <% } %>
         <br>
         <section ng-view></section> 
         
@@ -20,15 +12,23 @@
         </script>
 
             <img src="img/logo.png" alt="Logo">
+
         <script src="/bower_components/angular/angular.js"></script>
         <script type="text/javascript" src="/bower_components/angular-route/angular-route.js"></script>
         <script type="text/javascript" src="bower_components/angular-resource/angular-resource.js"></script>
-        <script type="text/javascript" src="/app.js"></script>
+       
         <script type="text/javascript" src="/example/example.client.module.js"></script>
-        <script type="text/javascript" src="/example/config/example.client.config.js"></script>
+        <script type="text/javascript" src="/example/config/example.client.routes.js"></script>
         <script type="text/javascript" src="/example/controllers/example.client.controller.js"></script>
-        <script type="text/javascript" src="/example/services/users/users.client.module.js"></script>
-        <script type="text/javascript" src="/example/services/users/authentication.client.service.js"></script>
+
+        <script type="text/javascript" src="/users/users.client.module.js"></script>
+        <script type="text/javascript" src="/users/services/authentication.client.service.js"></script>
+
         <script type="text/javascript" src="/articles/articles.client.module.js"></script>
+        <script type="text/javascript" src="/articles/services/articles.client.service.js"></script>
+        <script type="text/javascript" src="/articles/controllers/articles.client.controller.js"></script> 
+        <script type="text/javascript" src="/articles/config/articles.client.routes.js"></script> 
+
+        <script type="text/javascript" src="/app.js"></script>
     </body>
 </html>

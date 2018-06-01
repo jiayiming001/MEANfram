@@ -1,20 +1,31 @@
-angualr.module('articles')
+angular.module('articles')
     .controller('ArticlesController', ['$scope', 
         '$routeParams', '$location', 'Authentication', 'Articles', 
-        function ($scope, $routeParams, $location, Articles, Authentication) {
+        function ($scope, $routeParams, $location, Authentication, Articles) {
+            var data = this;
+
             $scope.authentication = Authentication;
             
             $scope.create =   function () {
-                var article = new Articles({
-                    title: this.title,
-                    content: this.content
-                });
+                // var article = new Articles({
+                //     title: data.title,
+                //     content: data.content
+                // });
 
-                article.$save(function (response) {
-                    $location.path('articles/' + response,_id);
-                }, function (errResponse) {
-                    $scope.error = errResponse.data.message;
-                });
+                // article.$save(function (response) {
+                //     $location.path('articles/' + response,_id);
+                // }, function (errResponse) {
+                //     $scope.error = errResponse.data.message;
+                // });
+
+                Articles.save({
+                    title: data.title,
+                    content: data.content
+                }, function (response) {
+                    $location.path('articles/' + response._id);
+                  }, function (errResponse) {
+                      $scope.error = errResponse.data.message;
+                    })
             };
 
             $scope.find = function () {

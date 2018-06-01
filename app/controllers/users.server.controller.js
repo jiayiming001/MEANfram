@@ -143,7 +143,7 @@ exports.signup = function (req, res, next) {  //创建新用户,创建成功就�
 };
 
 exports.signout = function (req, res) {
-    req.logout();
+    req.logout();       //使用passpot模块提供的req.logout(),方法退出已验证的会话
     res.redirect('/');
 };
 

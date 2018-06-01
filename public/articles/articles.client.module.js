@@ -1,1 +1,1 @@
-angular.module('articles', []);
+angular.module('articles', ['ngResource', 'users']);

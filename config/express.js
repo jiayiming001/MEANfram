@@ -55,7 +55,7 @@ module.exports = function() {
     app.use(express.static(path.join(__dirname, '../public'))); //配置静态文件路径
 
     require('../app/routes/index.server.routes')(app); //使用路由文件中的函数为app添加路由
-    require('../app/routes/user.server.routers.js')(app);
+    require('../app/routes/user.server.routers')(app);
     require('../app/routes/article.server.routes')(app);
 
     return app;

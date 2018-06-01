@@ -1,5 +1,17 @@
 <section ng-controller="ExampleController">
-    <input type="text" id="text1" ng-model="name">
+    <div ng-show="!authentication.user">
+        <a href="/signup">Sign Up</a>
+        <a  href="/signin">Sign In</a>
+    </div>
+    <div ng-show="authentication.user">
+        <h1>Hello <span ng-bind="authentication.user.fullName"></span></h1>
+        <a href="/signout">Sign Out</a>
+        <ul>
+            <li><a href="/#!/articles">List Article</a></li>
+            <li><a href="/#!/articles/create">Create Article</a></li>
+        </ul>
+    </div>
+    <!-- <input type="text" id="text1" ng-model="name">
     <input type="text" id="text2" ng-model="name">
-    <h1>{{name}}</h1>
+    <h1>{{name}}</h1> -->
 </section>
