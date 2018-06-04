@@ -29,6 +29,7 @@ exports.create = function (req, res) {
 
 
 exports.list = function (req, res) {
+    //调用mongoose模型的populate方法,向article对象中的creator属性填充了与用户相关的firstName等字段
     Article.find().sort('-created').populate('creator', 'firstName lastName fullName').
         exec(function (err, articles) {
             if(err) {

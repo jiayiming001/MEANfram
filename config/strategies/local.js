@@ -14,7 +14,7 @@ module.exports = function () {
             } 
             if(!user) {
                 return done(null, false, {
-                    message: 'Unknow, user'
+                    message: 'Unknow user'
                 });
             }
             if(!user.authenticate(password)) {

@@ -1,7 +1,7 @@
 "use strict";
 const User = require('mongoose').model('User'), //返回在models中创建的User模型
     Passport = require('passport'),
-    config = requir('./../../config/config.js'); 
+    config = require('./../../config/config.js'); 
 
 
 exports.create = function(req, res, next) {   //根据req.body的json数据,创建一个user文档
