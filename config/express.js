@@ -6,7 +6,7 @@ const express = require("express"),
     methodOverride = require('method-override'), //提供了对HTTP DELETE和PUT的方法
     path = require('path'),         //提供文件目录拼接
     session = require('express-session'), //Simple cookie-based session middleware
-    redisStore = require('connect-redis')(session), //redis内存数据库存放session功能
+    //redisStore = require('connect-redis')(session), //redis内存数据库存放session功能
     passport = require('passport'), //Passport是Node.js的身份验证中间件
     flash = require('connect-flash'); //用于存储临时消息的node模块
 
@@ -18,13 +18,6 @@ const socketio = require('socket.io'),
     MongoStore = require('connect-mongo')(session); //当作会话数据储存
 
 
-    app.use(session({
-        saveUninitialized: true,
-        resave: true,
-        secret: config.sessionSecret,
-        store: MongoStore
-    }));
-
 const config = require('./config'); //加载一些配置,比如session的secret
 
 
@@ -33,6 +26,20 @@ module.exports = function() {
 
     var server = http.createServer(app);  //使用新的server替换以前的express应用对象
     var io = socketio.listen(server);   //将soket.io服务附加给server
+
+    //创建MonggoStore的实例,并传入了Mongoose的连接对象
+    var mongoStore = new MongoStore({
+        url: config.db
+    });
+
+    app.use(session({    //配置session,存储到mongo数据库中
+        saveUninitialized: true,
+        resave: true,
+        secret: config.sessionSecret,
+        store: mongoStore
+    }));
+
+
 
     if(process.env.NODE_ENV === 'development') {
         app.use(morgan('dev'));       //开发环境下启用简单日志功能
@@ -75,5 +82,7 @@ module.exports = function() {
     require('../app/routes/user.server.routers')(app);
     require('../app/routes/article.server.routes')(app);
 
+    require('./socketio')(server, io, mongoStore);
+    
     return server;
 }
