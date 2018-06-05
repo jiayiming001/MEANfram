@@ -7,17 +7,6 @@ angular.module('articles')
             $scope.authentication = Authentication;
             
             $scope.create =   function () {
-                // var article = new Articles({
-                //     title: data.title,
-                //     content: data.content
-                // });
-
-                // article.$save(function (response) {
-                //     $location.path('articles/' + response,_id);
-                // }, function (errResponse) {
-                //     $scope.error = errResponse.data.message;
-                // });
-
                 Articles.save({
                     title: data.title,
                     content: data.content

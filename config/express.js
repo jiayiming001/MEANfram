@@ -1,7 +1,7 @@
 'use strict';
 const express = require("express"),
     morgan = require('morgan'), //提供简单日志中间件
-    compress = require('compression'), //提供响应式内容的压缩功能
+    compress = require('compression'), //提供响应式内容的压缩功能,gzip/deflate进行压缩
     bodyParser = require('body-parser'), //提供几个处理请求数据的中间件
     methodOverride = require('method-override'), //提供了对HTTP DELETE和PUT的方法
     path = require('path'),         //提供文件目录拼接
@@ -45,11 +45,32 @@ module.exports = function() {
 
 
     if(process.env.NODE_ENV === 'development') {
-        app.use(morgan('dev'));       //开发环境下启用简单日志功能
+        //开发环境下启用简单日志功能   
+        app.use(morgan(function(tokens, req, res) {
+            return [
+                tokens.method(req, res),
+                tokens.url(req, res),
+                tokens.status(req, res),
+                tokens.res(req, res, 'content-length'),
+                '-',
+                tokens['response-time'](req, res), 
+                'ms'].join(' ');
+        }));       
     } else if (process.env.NODE_ENV === 'production') {
-        app.use(compress());          //生产环境下启动响应式内容的压缩功能
+         //生产环境下启动响应式内容的压缩功能,不对请求头部含有x-no-compression的请求压                                                                                                                                                                                                                                                                                                                           缩响应内容
+        app.use(compress({filter: shouldCompress}));         
     }
-    app.use(bodyParser.urlencoded({ extended: true }));//作用是获得req.body中的字符串，然后转成对象赋值给req.body
+
+    function shouldCompress(req, res) {
+        if(req.headers['x-no-compression']){
+            return false;
+        } 
+        return compress.filter(req, res);
+    }
+
+    //作用是获得req.body中的字符串，然后转成对象赋值给req.body
+    //Content-Type: application/x-www-form-urlencoded 常见的form提交
+    app.use(bodyParser.urlencoded({ extended: true }));
     app.use(bodyParser.json()); //提供req中的json数据的解析,解析结果放在req.body中
     app.use(methodOverride()); //添加DELETE和PUT两个http请求方式
 
