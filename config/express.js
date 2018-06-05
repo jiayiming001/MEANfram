@@ -33,10 +33,13 @@ module.exports = function() {
     });
 
     app.use(session({    //配置session,存储到mongo数据库中
-        saveUninitialized: true,
+        saveUninitialized: false,
         resave: true,
         secret: config.sessionSecret,
-        store: mongoStore
+        store: mongoStore,
+        cookie: {
+            maxAge: config.minute
+        }
     }));
 
 

@@ -1,18 +1,20 @@
 angular.module('chat')
     .controller('ChatController', ['$scope', 'Socket',
     function ($scope, Socket) {
+        var self = this;
         $scope.messages = [];
         Socket.on('chatMessage', function (message) {
             $scope.messages.push(message);
         });
 
         $scope.sendMessage = function () {
+            console.log(self.messageText);
             var message = {
-                text: this.messageText,
+                text: self.messageText,
             }
 
             Socket.emit('chatMessage', message);
-            this.messageText = '';
+            self.messageText = '';
         }
 
         $scope.destory = function () {

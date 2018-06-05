@@ -8,7 +8,7 @@ module.exports = function (server, io, mongoStore) {
     io.use(function (socket, next) {  
         //使用cookieParser来解析握手请求中的cookie,并且获取对应express中的sessionId
         cookieParser(config.sessionSecret)(socket.request, {}, function (err) {
-            var sessionId = socket.request.signedCookiesp['connect.sid'];
+            var sessionId = socket.request.signedCookies['connect.sid'];
 
             //使用mongoStore检索会话信息
             mongoStore.get(sessionId, function (err, session) {
