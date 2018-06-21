@@ -33,8 +33,8 @@ module.exports = function() {
     });
 
     app.use(session({    //配置session,存储到mongo数据库中
-        saveUninitialized: false,
-        resave: true,
+        saveUninitialized: false, //是否自动保存未初始化的会话,建议false
+        resave: false,      //是否每次都重新保存会话,建议false
         secret: config.sessionSecret,
         store: mongoStore,
         cookie: {

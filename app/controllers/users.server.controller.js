@@ -44,7 +44,7 @@ exports.userByID = function (req, res, next, id) {  //url中带有id的时候调
         if(err) {
             return next(err);
         } else {
-            req.user = user;
+            req.user_2 = user;
             next();
         }
     });
@@ -62,7 +62,7 @@ exports.update = function (req, res, next) {    //POST请求时,在userByID中�
 };
 
 exports.delete = function (req, res, next) { //DETELE请求时调用,在中间件userByID后调用
-    User.remove({_id: req.user.id}, (err) => {
+    User.remove({_id: req.user_2.id}, (err) => {
         if(err) {
             return next(err);
         } else {
@@ -131,19 +131,20 @@ exports.signup = function (req, res, next) {  //创建新用户,创建成功就�
     if(!user) {                                 //登录成功后便会注册到req.user中
         var user = new User(req.body);
         var message = null;
-        if(req.body.adminpasswd === congig.adminpasswd) {
-            user.role = 'admin';
+        if(req.body.adminpasswd === config.adminpasswd) {
+            user.role = 'Admin';
         } else {
-            user.provider = 'local'; 
+            user.role = 'User'; 
         }
+        user.provider = "local";
         user.save((err) => {
             if(err) {
                 var message = getErrorMessage(err);
                 req.flash('error', message);        //借用connect-flash模块,将消息存在会话对象flash中,到新页面一次性发送给用户
                 return res.redirect('/signup');            
             }
-            req.login(user, function (err) {
-                if(err) return next(err);
+            req.login(user, function (err) { //使用req.login()方法来创建一个成功登陆的会话
+                if(err) return next(err);     //成功以后user对象便会注册到req.user对象中
                 return res.redirect('/');
             });
         });
@@ -173,9 +174,7 @@ exports.saveOAuthUserProfile = function (req, profile, done) {
                 User.findUniqueUsername(possibleUsername, null, 
                 function (availableUsername) {
                     profile.username = availableUsername;
-                    
                     user = new User(profile);
-
                     user.save((err) => {
                         if(err) {
                             var message = getErrorMessage(err);
@@ -202,7 +201,25 @@ exports.requiresLogin = function (req, res, next) {
             message: 'User is not logged in'
         });
     }
-
     next();
 }
 
+exports.isAdmin = function (req, res, next) {
+    if(req.user.role === 'Admin'){
+        next();
+    } else {
+        return res.status(401).send(
+            {message: 'User is not admin user'}
+        );
+    }
+}
+
+exports.userList = function (req, res) {
+        User.userList(req.user, function (result) {
+            if(result) {
+              res.json(result);
+            } else {
+                res.json({});
+            }
+        });
+}

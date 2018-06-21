@@ -1,1 +1,1 @@
-angular.module('users', ['ngResource']);
+angular.module('users', ['ngRoute','ngResource']);

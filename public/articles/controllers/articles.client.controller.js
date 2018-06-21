@@ -40,8 +40,10 @@ angular.module('articles')
             $scope.delete = function (article) {
                 if(article) {
                     article.$remove(function () {
-                        for(var i in $scope.articles[i] ===  article) {
-                            $scope.articles.splice(i, 1);  //数组方法:从i的索引开始出掉1个数组成员
+                        for(var i in $scope.articles){
+                            if($scope.articles[i] ===  article) {
+                                $scope.articles.splice(i, 1);  //数组方法:从i的索引开始出掉1个数组成员 
+                            }                       
                         }
                     });
                 }else {

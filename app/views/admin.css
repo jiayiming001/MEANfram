@@ -1,0 +1,267 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+
+a, a * {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+body {
+    font-size: 12px;
+}
+
+img {
+    border: 0;
+}
+
+em, i {
+    font-style: normal;
+    text-align: left;
+    font-size: inherit;
+}
+
+.g-topbar {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: 99;
+    zoom: 1;
+}
+
+.m-top {
+    position: relative;
+    z-index: 1000;
+    height: 70px;
+    box-sizing: border-box;
+    background: #242424;
+    border-bottom: 1px solid #000;
+
+}
+
+
+.m-top .wrap {
+    width: 1100px;
+    margin: 0 auto;
+}
+
+.m-top .logo, .m-tophead, .m-nav a.z-slt .cor{
+    background:url("https://s2.music.126.net/style/web2/img/frame/topbar.png?59c3e0c219c36f79bd1546686318da81") no-repeat 0 999px; 
+}
+
+.m-top .logo {
+    float: left;
+    width: 176px;
+    height: 69px;
+    background-position: 0 0; 
+}
+
+
+.m-nav {
+    float: left;
+}
+
+li, s {
+ list-style: none;
+}
+
+.m-nav li {
+    position: relative;
+}
+
+.m-nav li, .m-nav li span, .m-nav a, .m-nav a em {
+    float: left;
+    height: 70px;
+    font-size: 14px;
+}
+
+.m-nav a.z-slt .cor {
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 64px;
+    width: 12px;
+    height: 7px;
+    margin-left: -6px;
+    overflow: hidden;
+    background-position: -226px 0;
+}
+
+.m-nav a:hover, .m-nav a.z-slt {
+    background: #000;
+    text-decoration: none;
+    color: #fff;
+}
+
+.m-nav a {
+    line-height: 70px;
+    text-align: center;
+    padding: 0 19px;
+    color: #ccc;
+}
+
+.m-nav .cor {
+    display: none;
+}
+
+.m-nav .dot {
+    display: block;
+    position: absolute;
+    top: 24px;
+    left: 65px;
+    width: 6px;
+    height: 6px;
+    border-radius: 6px;
+    background: red;
+}
+
+.m-tophead {
+    float: right;
+    height: 45px;
+    margin: 19px 0 0 20px;
+    padding: 0 22px 0 0;
+    background-position: right -50px;
+}
+
+.f-cp:after {
+    clear: both;
+    content: '.';
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+
+.m-tlist {
+    position: absolute;
+    top: 32px;
+    right: -43px;
+    width: 158px;
+    background: #2b2b2b;
+    border:1px solid #202020;
+    box-shadow: 0 8px 24px 0 rgba(0,0,0,0.5);
+    border-radius: 4px;
+}
+
+.m-tlist a {
+    position: relative;
+    height: 38px;
+    box-sizing: border-box;   
+    overflow: hidden;
+    padding-left: 24px;
+    color: #ccc;
+    line-height: 30px;
+}
+
+.m-tophead .link, .m-tophead .link:hover {
+    display: block;
+    width: 28px;
+    margin-top: 7px;
+    color: #787878;
+}
+
+.m-tlist li, .m-tlist li a {
+    float: left;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.m-tlist a:hover {
+    background: #353535;
+    color: #fff;
+    text-decoration: none;
+
+}
+
+.m-tlist .icn {
+    float: left;
+    width: 18px;
+    height: 18px;
+    margin: 10px 10px 0 -7px;
+}
+
+
+
+.m-tlist .icn, .m-tlist .arr {
+    background: url("https://s2.music.126.net/style/web2/img/frame/toplist.png?34fabaaf1abf6c56600abe60627a87a0") no-repeat 0 9999px;
+}
+
+.m-tlist .icn-mb {
+    background-position: 0 0;
+}
+
+.m-tlist .icn-wx {
+    background-position: -20px -20px; 
+}
+
+.m-tlist .icn-qq {
+    background-position: -20px -40px; 
+}
+
+.g-iframe {
+    position: absolute;
+    left: 0;
+    top: 70px;
+    width: 100%;
+    height: 100%;
+    border: 0; 
+}
+
+.n-ban .wrap {
+    position: relative;
+    width: 982px;
+    height: 336px;
+    margin: 0 auto;
+}
+
+.n-ban .ban {
+    width: 982px;
+    height: 336px;
+}
+
+.f-pr {
+    position: relative;
+    zoom: 1;
+}
+
+.n-ban .ban img {
+    display: block;
+    width: 730px;
+    height: 336px;
+}
+
+.n-ban .ban .btnl, .n-ban .ban .btnr {
+    background: url("https://s2.music.126.net/style/web2/img/index/banner.png?f1e6a4e0b725f8d2d8e2d43e5375dd85") no-repeat 0 9999px;
+}
+
+.n-ban .ban .btnl, .n-ban .ban .btnr{
+    display: block;
+    position: absolute;
+    top: 50%;
+    margin-top: -31px;
+    width: 37px;
+    height: 63px;
+    text-indent: -9999px;
+}
+
+.n-ban .ban .btnl {
+    left: -68px;
+    background-position:0 -360px; 
+}
+
+.n-ban .ban .btnr {
+    right: -68px;
+    background-position:0 -508px; 
+}
+
+.n-ban .ban .btnl:hover, .n-ban .ban .btnr:hover{
+    background-color: #000;
+    opacity: 0.25; 
+}
+
+.p-center img{
+    left: 77px;
+    position: absolute;
+}

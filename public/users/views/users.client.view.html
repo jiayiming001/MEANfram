@@ -1,0 +1,12 @@
+<div ng-controller="userController" ng-init="getUserList()">
+    <h2>User List</h2>
+    <ul>
+        <li ng-repeat="user in users">
+            <small ng-bind="user.username"></small>
+            <big ng-bind="user.firstName"></big>
+            <small ng-bind="user.lastName"></small>
+            <a ng-click="deleteUser(user)">删除该用户</a>
+        </li>
+    </ul>
+    <h3 ng-bind="message"></h3>
+</div>

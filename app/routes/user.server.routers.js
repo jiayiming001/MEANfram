@@ -8,11 +8,18 @@ module.exports = function(app) {
         .post(users.create) 
         .get(users.list);
 
-    app.route("/users/:userId")  //read()方法所在路由中有userId参数
-        .get(users.read)
-        .put(users.update)
-        .delete(users.delete);
+    // app.route("/users/:userId")  //read()方法所在路由中有userId参数
+    //     .get(users.read)
+    //     .put(users.update)
+    //     .delete(users.delete);
     
+    app.route('/admin/userlist/:userId')
+        .delete(users.requiresLogin, users.isAdmin, users.delete)
+        .get(users.read)
+   
+
+    app.get('/admin/userlist', 
+        users.requiresLogin, users.isAdmin, users.userList);
     // app.route("/user/:username")
     //     .get(users.read);
 

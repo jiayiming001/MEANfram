@@ -38,7 +38,8 @@ var UserSchema = new Schema({
     prociderData: {},
     role: {
         type: String,
-        enum: ['Admin', 'User']
+        enum: ['Admin', 'User'],
+        default: 'User',
     },
     created: {
         type: Date,
@@ -99,6 +100,22 @@ UserSchema.methods.hashPassword = function (password) {
 UserSchema.methods.authenticate = function(password) {
     return this.password === this.hashPassword(password);
 };
+
+
+UserSchema.statics.userList = function (user, callback) {  //查找出用户权限不是admin的用户
+    var _this = this;
+    _this.find({role: {'$ne': ['Admin']}}, function (err, users) {
+        if(!err) {
+            if(!user) {
+                callback(null);
+            }else {
+                callback(users);
+            }
+        }else {
+            callback(null);
+        }
+    })
+}
 
 //静态方法:寻找一个不同的用户名
 UserSchema.statics.findUniqueUsername = function (username, suffix, callback) {

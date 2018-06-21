@@ -1,15 +1,90 @@
-<!DOCTYPE <!DOCTYPE html>
+<!DOCTYPE html>
 <html ng-app="admin">
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Admin</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./admin.css">
+    <script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="./admin.js"></script>
 </head>
 <body>
-    <div ng-view></div>
-    <script src="/bower_components/angular/angular.js"></script>
-    <script type="text/javascript" src="/bower_components/angular-route/angular-route.js"></script>
-    <script type="text/javascript" src="bower_components/angular-resource/angular-resource.js"></script>
+    <div id="g-topbar" class="g-topbar">
+        <div class="m-top">
+            <div class="wrap f-cp">
+                <h1 class="logo"></h1>
+                <ul class="m-nav">
+                    <li class="fst">
+                        <span>
+                            <a href="#" class="z-slt">
+                                <em>首页</em>
+                                <sub class="cor">&nbsp;</sub>
+                            </a>
+                        </span>
+                    </li>
+                    <li>
+                        <span>
+                            <a href="#">
+                                <em>聊天室</em>
+                                <sub class="cor">&nbsp;</sub>
+                                <i class="dot"></i>
+                            </a>
+                        </span>
+                    </li>
+                    <li>
+                        <span>
+                            <a href="#">
+                                <em>订阅号</em>
+                                <sub class="cor">&nbsp;</sub>
+                            </a>
+                        </span>
+                    </li>
+                </ul>
+                <div class="m-tophead f-pr">
+                    <a href="#" class="link">登录 </a>
+                    <div class="m-tlist" style="display: none">
+                        <div class="inner">
+                            <ul>
+                                <li>
+                                    <a href="#">
+                                        <i class="icn icn-mb"></i>
+                                        <em>FaceBook</em>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="icn icn-wx"></i>
+                                        <em>Github</em>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="icn icn-qq"></i>
+                                        <em>本地登录</em>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="g-iframe">
+        <div class="n-ban">
+            <div class="wrap">
+                <div class="ban f-pr">
+                    <a class="p-center" href="#">
+                        <img>
+                    </a>
+                    <a href="#" class="btnl"><</a>
+                    <a href="#" class="btnr">></a>
+                </div>
+            </div>
+        </div>
+        <section ng-view></section>
+    </div>
+   
 </body>
 </html>

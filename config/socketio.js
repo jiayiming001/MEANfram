@@ -13,7 +13,7 @@ module.exports = function (server, io, mongoStore) {
             //使用mongoStore检索会话信息
             mongoStore.get(sessionId, function (err, session) {
                 socket.request.session = session;
-
+                
                 //一旦检索到就用passport.initialize()和passport.session()中间件根据会话
                 //信息来填充会话的user对象
                 passport.initialize()(socket.request, {}, function () {

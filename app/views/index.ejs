@@ -2,16 +2,89 @@
 <html ng-app="mean">
     <head>
         <title><%= title %></title>
+        <link rel="stylesheet" href="/css/main.css">
+        <script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+        <script type="text/javascript" src="/js/main.js"></script>
     </head>
     <body>
-        <br>
-        <section ng-view></section> 
-        
         <script type="text/javascript">
             window.user =  <%- user || 'null' %>;
         </script>
-
-            <img src="img/logo.png" alt="Logo">
+        <div id="g-topbar" class="g-topbar">
+            <div class="m-top">
+                <div class="wrap f-cp">
+                    <h1 class="logo"></h1>
+                    <ul class="m-nav">
+                        <li class="fst">
+                            <span>
+                                <a href="#" class="z-slt">
+                                    <em>首页</em>
+                                    <sub class="cor">&nbsp;</sub>
+                                </a>
+                            </span>
+                        </li>
+                        <li>
+                            <span>
+                                <a href="#">
+                                    <em>聊天室</em>
+                                    <sub class="cor">&nbsp;</sub>
+                                    <i class="dot"></i>
+                                </a>
+                            </span>
+                        </li>
+                        <li>
+                            <span>
+                                <a href="#">
+                                    <em>订阅号</em>
+                                    <sub class="cor">&nbsp;</sub>
+                                </a>
+                            </span>
+                        </li>
+                    </ul>
+                    <div class="m-tophead f-pr">
+                        <a href="#" class="link">登录 </a>
+                        <div class="m-tlist" style="display: none">
+                            <div class="inner">
+                                <ul>
+                                    <li>
+                                        <a href="/oauth/facebook">
+                                            <i class="icn icn-mb"></i>
+                                            <em>FaceBook</em>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/oauth/github">
+                                            <i class="icn icn-wx"></i>
+                                            <em>Github</em>
+                                        </a>
+                                    </li>
+                                    <li class="local">
+                                        <a href="#">
+                                            <i class="icn icn-qq"></i>
+                                            <em>本地登录</em>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="g-iframe">
+            <div class="n-ban">
+                <div class="wrap">
+                    <div class="ban f-pr">
+                        <a class="p-center" href="#">
+                            <img>
+                        </a>
+                        <a href="#" class="btnl"><</a>
+                        <a href="#" class="btnr">></a>
+                    </div>
+                </div>
+            </div>
+            <section ng-view></section> 
+        </div>   
 
         <script type="text/javascript" src="/socket.io/socket.io.js"></script>
 
@@ -25,6 +98,9 @@
 
         <script type="text/javascript" src="/users/users.client.module.js"></script>
         <script type="text/javascript" src="/users/services/authentication.client.service.js"></script>
+        <script type="text/javascript" src="/users/services/admin.client.services.js"></script>
+        <script type="text/javascript" src="/users/config/users.client.routes.js"></script>
+        <script type="text/javascript" src="/users/controllers/users.client.controller.js"></script>
 
         <script type="text/javascript" src="/articles/articles.client.module.js"></script>
         <script type="text/javascript" src="/articles/services/articles.client.service.js"></script>
