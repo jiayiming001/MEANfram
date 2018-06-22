@@ -4,7 +4,8 @@ var app = angular.module("mean", [
     'example', 
     'articles',
     'users',
-    'chat'
+    'chat',
+    'userPage'
 ]);
 // app.config(['$locationProvider', '$routeProvider', 
 //     function ($locationProvider, $routeProvider) {

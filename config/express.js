@@ -106,7 +106,7 @@ module.exports = function() {
     require('../app/routes/user.server.routers')(app);
     require('../app/routes/article.server.routes')(app);
 
-    require('./socketio')(server, io, mongoStore);
+    require('./socketio')(server, io, mongoStore); //为server和io,配置处理客户端信息的处理
     
     return server;
 }

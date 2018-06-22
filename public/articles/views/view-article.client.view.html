@@ -1,6 +1,6 @@
 <section ng-controller="ArticlesController" ng-init="findOne()">
     <h1 ng-bind="article.title"></h1>
-    <div ng-show="authentication.user._id == article.creator._id">
+    <div ng-show="authentication.user._id === article.creator._id">
         <a href="/#!/articles/{{article._id}}/edit">edit</a>
         <a href="#" ng-click="delete()">delete</a>
     </div>
@@ -8,7 +8,12 @@
         <em>Posted on</em>
         <em ng-bind="article.created | date:'mediumDate'"></em>
         <em>by</em>
-        <em ng-bind="article.creator.fullName"></em>
+        <div ng-show="article.creator === null">
+            <em>作者已被删除</em>
+        </div>
+        <div ng-show="article.creator !== null">
+            <em ng-bind="article.creator.fullName"></em>
+        </div> 
     </small>
     <p ng-bind="article.content"></p>
 </section>

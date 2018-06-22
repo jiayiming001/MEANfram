@@ -17,7 +17,7 @@ angular.module('chat')
             self.messageText = '';
         }
 
-        $scope.destory = function () {
+        $scope.destory = function () {  //离开聊天室
             Socket.removeListener('chatMessage');
         }
 }]);

@@ -1,0 +1,25 @@
+.sidebar-tree {
+    border: 1px solid #bbb;
+    margin: 0;
+    text-align: center;
+    background: #eee;
+}
+
+.sidebar-tree ul {
+    padding: 0;
+}
+.sidebar-tree ul li{
+    margin: 0;
+    line-height: 26px;
+    padding: 5px 2px;
+    position: relative;
+    display: block;
+    cursor: pointer;
+    border-bottom: 1px  solid #fff;
+}
+
+.user-image {
+    margin: auto;
+    height: 100px;
+    width: 100%;
+}

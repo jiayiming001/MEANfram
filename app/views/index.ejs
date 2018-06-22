@@ -2,92 +2,48 @@
 <html ng-app="mean">
     <head>
         <title><%= title %></title>
-        <link rel="stylesheet" href="/css/main.css">
-        <script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
-        <script type="text/javascript" src="/js/main.js"></script>
+        <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/index.css">
+        <link rel="stylesheet" href="/components/user-page/user-page.component.css">
     </head>
     <body>
         <script type="text/javascript">
             window.user =  <%- user || 'null' %>;
         </script>
-        <div id="g-topbar" class="g-topbar">
-            <div class="m-top">
-                <div class="wrap f-cp">
-                    <h1 class="logo"></h1>
-                    <ul class="m-nav">
-                        <li class="fst">
-                            <span>
-                                <a href="#" class="z-slt">
-                                    <em>首页</em>
-                                    <sub class="cor">&nbsp;</sub>
-                                </a>
-                            </span>
-                        </li>
-                        <li>
-                            <span>
-                                <a href="#">
-                                    <em>聊天室</em>
-                                    <sub class="cor">&nbsp;</sub>
-                                    <i class="dot"></i>
-                                </a>
-                            </span>
-                        </li>
-                        <li>
-                            <span>
-                                <a href="#">
-                                    <em>订阅号</em>
-                                    <sub class="cor">&nbsp;</sub>
-                                </a>
-                            </span>
-                        </li>
-                    </ul>
-                    <div class="m-tophead f-pr">
-                        <a href="#" class="link">登录 </a>
-                        <div class="m-tlist" style="display: none">
-                            <div class="inner">
-                                <ul>
-                                    <li>
-                                        <a href="/oauth/facebook">
-                                            <i class="icn icn-mb"></i>
-                                            <em>FaceBook</em>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/oauth/github">
-                                            <i class="icn icn-wx"></i>
-                                            <em>Github</em>
-                                        </a>
-                                    </li>
-                                    <li class="local">
-                                        <a href="#">
-                                            <i class="icn icn-qq"></i>
-                                            <em>本地登录</em>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
+        <div class="row">
+                <ul class="nav nav-pills nav-postion">
+                    <li role="presentation" class="nav-logo"><span id="nav-image"></span></li>
+                    <li role="presentation" ><a href="#">Home</a></li>
+                    <li role="presentation" ><a href="#">聊天室</a></li>
+                    <li role="presentation" ><a href="#">文章</a></li>
+                    <li role="presentation" class="dropdown nav-sign" style="float: right;"> 
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                          登录/注册 <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/signin">本地登录</a></li>
+                            <li><a href="/oauth/github">Github登录</a></li>
+                            <li><a href="/oauth/facebook">Facebook登录</a></li>
+                            <li><a href="/signup">注册账号</a></li>
+                        </ul>
+                    </li>
+                </ul>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <section ng-view></section> 
+            </div>
+            <div class="col-md-3">
+                <user-page></user-page>
             </div>
         </div>
-        <div class="g-iframe">
-            <div class="n-ban">
-                <div class="wrap">
-                    <div class="ban f-pr">
-                        <a class="p-center" href="#">
-                            <img>
-                        </a>
-                        <a href="#" class="btnl"><</a>
-                        <a href="#" class="btnr">></a>
-                    </div>
-                </div>
-            </div>
-            <section ng-view></section> 
-        </div>   
-
+        
+        <!-- 需要加载socket.io客户端第三方库 -->
         <script type="text/javascript" src="/socket.io/socket.io.js"></script>
-
+    
         <script src="/bower_components/angular/angular.js"></script>
         <script type="text/javascript" src="/bower_components/angular-route/angular-route.js"></script>
         <script type="text/javascript" src="bower_components/angular-resource/angular-resource.js"></script>
@@ -111,7 +67,12 @@
         <script type="text/javascript" src="/chat/services/chat.client.service.js"></script>
         <script type="text/javascript" src="/chat/controllers/chat.client.controller.js"></script>
         <script type="text/javascript" src="/chat/config/chat.client.routes.js"></script>
-        
+
+        <script type="text/javascript" src="/components/user-page/user-page.module.js">
+        </script>
+         <script type="text/javascript" src="/components/user-page/user-page.component.js">
+         </script>
+
         <script type="text/javascript" src="/app.js"></script>
     </body>
 </html>

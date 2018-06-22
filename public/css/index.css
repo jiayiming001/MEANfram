@@ -1,0 +1,26 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.nav-postion {
+    background-color: #ddd;  
+    height: 40px;
+}
+
+.nav-logo{
+    margin: 0 50px 0 30px;
+}
+.nav-sign {
+    float: right;
+    margin-right: 50px; 
+}
+#nav-image {
+    display: inline-block;
+    width: 200px;
+    height: 40px;
+    background: url("/img/logo.png") no-repeat ;
+    background-size: 200px 40px; 
+    background-origin: content-box;
+    
+}
